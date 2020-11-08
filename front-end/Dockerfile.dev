@@ -1,14 +1,17 @@
-FROM node:alpine
+FROM node:10
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+COPY src/App.js ./
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 8000
+RUN ls src
+
+EXPOSE 3000
 
 # You can change this
-CMD [ "node", "App.js"]
+CMD ["npm", "start"]

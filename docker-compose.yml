@@ -4,19 +4,30 @@ services:
         container_name: front-end
         build:
             context: ./front-end
-            dockerfile: Dockerfile
-        image: mapuya19/sus_toxicity
+            dockerfile: Dockerfile.dev
+        image: mapuya19/sus_toxcity/frontend
         ports:
             - "3000:3000"
         volumes:
-            - ./front-end:/usr/src/app
+            - ./front-end:/usr/src/app/frontend
     backend:
         container_name: node_server
         build:
             context: ./node-server
             dockerfile: Dockerfile
-        image: mapuya19/sus_toxicity
+        image: mapuya19/sus_toxcity/backend
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./node-server:/usr/src/app
+    max-classifier:
+        container_name: max-classifier
+        build:
+            context: ./MAX-Toxic-Comment-Classifier
+            dockerfile: Dockerfile
+        image: mapuya19/sus_toxicity/max-classifier
         ports:
             - "5000:5000"
         volumes:
-            - ./node-server:/usr/src/app
+            - ./MAX-Toxic-Comment-Classifier:/usr/src/app/max-classifier
+

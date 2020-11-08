@@ -2,6 +2,7 @@ const express = require("express");
 var Twitter = require("twitter");
 var cors = require("cors");
 const { request } = require("express");
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var client = new Twitter({
   consumer_key: "VQ1HQtxIAD14Bh4zLVJQZJb4r",
@@ -11,13 +12,12 @@ var client = new Twitter({
 });
 
 const app = express();
-const port = 5000;
+const port = 8000;
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Hello World!"));
-app.get("/newEndpoint", (req, res) => res.send("This is my new endpoint"));
+var xhr = new XMLHttpRequest();
 
-// var params = { screen_name: "realDonaldTrump" };
+app.get("/", (req, res) => res.send("Hello World!"));
 
 app.get("/getTweets/:screen_name", (req, res) => {
   const params = req.params.screen_name;
@@ -31,6 +31,21 @@ app.get("/getTweets/:screen_name", (req, res) => {
       res.send(tweets);
     }
   });
+});
+
+app.get("/getToxcity:tweetText", (req, res) => {
+  const params = req.params.tweetText;
+  xhr.open("POST", "http://localhost:5000/model/predict", true);
+
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        console.log(xhr.responseText);
+    }
+  }
+
+  xhr.send(params);
+
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

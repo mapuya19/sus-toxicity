@@ -153,11 +153,21 @@ async function getResults(formData) {
 async function getTweet(userName) {
   const user = userName;
 
-  const twitter_api = `http://localhost:5000/getTweets/${user}`
+  const twitter_api = `http://localhost:8000/getTweets/${user}`
   const response = await fetch(twitter_api);
   const data = await response.json();
 
-  console.log(data)
+  let tweetText = data[0].text;
+
+  console.log(tweetText);
+}
+
+async function getToxicity(tweetText) {
+  const tox_api = `http://localhost:5000/getToxicity/${tweetText}`
+  const response = await fetch(twitter_api);
+  const data = await response.json();
+
+  let tweetText = data[0].text;
 }
 
 export default SwitchesGroup;

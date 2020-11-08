@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <Typography>How likely is your friend to get COVID-19?</Typography>
+      <Typography>How sus is your friend?</Typography>
       <div className="SwitchesGroup">
         <SwitchesGroup />
       </div>
