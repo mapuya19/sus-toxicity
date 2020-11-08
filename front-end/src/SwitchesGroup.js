@@ -15,7 +15,7 @@ function SwitchesGroup() {
     conscientious: false,
     openness: false,
     riceScore: 100,
-    twitterScore: "",
+    twitterName: "realDonaldTrump",
   });
 
   const arrayStates = [
@@ -24,7 +24,7 @@ function SwitchesGroup() {
     state.conscientious,
     state.openness,
     state.riceScore,
-    state.twitterScore,
+    state.twitterName,
   ];
 
   const handleChange = (event) => {
@@ -40,7 +40,7 @@ function SwitchesGroup() {
       <div className="formControl">
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            What traits does your friend have?
+            Is your friend...
           </FormLabel>
           <FormGroup>
             <FormControlLabel
@@ -51,7 +51,7 @@ function SwitchesGroup() {
                   name="extroverted"
                 />
               }
-              label="Extroverted"
+              label="Extroverted?"
             />
             <FormControlLabel
               control={
@@ -61,7 +61,7 @@ function SwitchesGroup() {
                   name="agreeable"
                 />
               }
-              label="Agreeable"
+              label="Agreeable?"
             />
             <FormControlLabel
               control={
@@ -71,7 +71,7 @@ function SwitchesGroup() {
                   name="conscientious"
                 />
               }
-              label="Conscientious"
+              label="Conscientious?"
             />
             <FormControlLabel
               control={
@@ -81,7 +81,7 @@ function SwitchesGroup() {
                   name="openness"
                 />
               }
-              label="Open to new experiences"
+              label="Open to new experiences?"
             />
             <TextField
               required
@@ -97,9 +97,9 @@ function SwitchesGroup() {
               required
               id="filled-helperText"
               label="Twitter Username"
-              defaultValue=""
+              defaultValue="realDonaldTrump"
               variant="filled"
-              name="twitterScore"
+              name="twitterName"
               value={state.value}
               onChange={updateField}
             />
@@ -120,6 +120,7 @@ function SwitchesGroup() {
 
 async function getResults(formData) {
   const formVars = await formData;
+  getTweet(formVars[5]);
 
   var score = 0;
   var finalScore = 0;
@@ -146,8 +147,17 @@ async function getResults(formData) {
 
   finalScore = (score / 5) * 100;
 
-  console.log(formVars[5]);
   console.log(finalScore);
+}
+
+async function getTweet(userName) {
+  const user = userName;
+
+  const twitter_api = `http://localhost:5000/getTweets/${user}`
+  const response = await fetch(twitter_api);
+  const data = await response.json();
+
+  console.log(data)
 }
 
 export default SwitchesGroup;
