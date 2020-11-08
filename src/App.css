@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.SwitchesGroup {
+  display: flex;
+  justify-content: center;
+}
+
+.SwitchesGroup .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.SwitchesGroup .formControl {
+  margin-top: 5vh;
+}
+

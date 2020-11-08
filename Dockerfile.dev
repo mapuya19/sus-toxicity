@@ -1,11 +1,9 @@
 FROM node:alpine
+WORKDIR /app/
+COPY package*.json ./
+RUN npm install
 
-WORKDIR /app
+# Actually copy the application code in
+COPY . ./
 
-COPY package.json /app
-
-RUN yarn install
-
-COPY . /app
-
-CMD ["yarn", "run", "start"]
+CMD ["npm", "start"]
