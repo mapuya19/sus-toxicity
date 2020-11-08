@@ -162,12 +162,12 @@ async function getTweet(userName) {
   console.log(tweetText);
 }
 
-async function getToxicity(tweetText) {
-  const tox_api = `http://localhost:5000/getToxicity/${tweetText}`
-  const response = await fetch(twitter_api);
-  const data = await response.json();
+// async function getToxicity(tweetText) {
+//   const tox_api = `http://localhost:5000/getToxicity/${tweetText}`
+//   const response = await fetch(twitter_api);
+//   const data = await response.json();
 
-  let tweetText = data[0].text;
-}
+//   let tweetText = data[0].text;
+// }
 
 export default SwitchesGroup;
