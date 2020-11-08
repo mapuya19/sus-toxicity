@@ -37,6 +37,11 @@
   }
 }
 
+.Question {
+  display: flex;
+  justify-content: center;
+}
+
 .SwitchesGroup {
   display: flex;
   justify-content: center;

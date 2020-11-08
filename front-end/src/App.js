@@ -7,7 +7,9 @@ function App() {
   return (
     <div>
       <Header />
-      <Typography>How sus is your friend?</Typography>
+      <div className="Question">
+        <Typography variant="h2" align="center">How sus is your friend?</Typography>
+      </div>
       <div className="SwitchesGroup">
         <SwitchesGroup />
       </div>
