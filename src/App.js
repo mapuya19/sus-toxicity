@@ -1,5 +1,5 @@
-import Header from "./Header"
-import SwitchesGroup from "./SwitchesGroup"
+import Header from "./Header";
+import SwitchesGroup from "./SwitchesGroup";
 import "./App.css";
 
 function App() {

@@ -9,11 +9,18 @@ import Button from "@material-ui/core/Button";
 
 function SwitchesGroup() {
   const [state, setState] = React.useState({
-    extraverted: false,
+    extroverted: false,
     agreeable: false,
     conscientious: false,
     openness: false,
   });
+
+  const arrayStates = [
+    state.extroverted,
+    state.agreeable,
+    state.conscientious,
+    state.openness,
+  ];
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -30,12 +37,12 @@ function SwitchesGroup() {
             <FormControlLabel
               control={
                 <Switch
-                  checked={state.extraverted}
+                  checked={state.extroverted}
                   onChange={handleChange}
-                  name="extraverted"
+                  name="extroverted"
                 />
               }
-              label="Extraverted"
+              label="Extroverted"
             />
             <FormControlLabel
               control={
@@ -71,15 +78,17 @@ function SwitchesGroup() {
         </FormControl>
       </div>
 
-      <Button variant="contained" color="primary" onClick={getResults}>
+      <Button variant="contained" color="primary" onClick={() => getResults(arrayStates)}>
         Check results!
       </Button>
     </div>
   );
 }
 
-async function getResults() {
-  console.log("this works");
+async function getResults(formData) {
+  const vars = await formData;
+
+  console.log(vars[0], vars[1], vars[2], vars[3]);
 }
 
 export default SwitchesGroup;
