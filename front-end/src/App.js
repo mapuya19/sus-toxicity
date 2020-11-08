@@ -8,7 +8,9 @@ function App() {
     <div>
       <Header />
       <div className="Question">
-        <Typography variant="h2" align="center">How sus is your friend?</Typography>
+        <Typography variant="h2" align="center">
+          How sus is your friend?
+        </Typography>
       </div>
       <div className="SwitchesGroup">
         <SwitchesGroup />

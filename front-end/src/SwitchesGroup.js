@@ -6,15 +6,15 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import Dialog from "@material-ui/core/Dialog";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 import Button from "@material-ui/core/Button";
 
@@ -43,27 +43,31 @@ function SwitchesGroup() {
       padding: theme.spacing(2),
     },
     closeButton: {
-      position: 'absolute',
+      position: "absolute",
       right: theme.spacing(1),
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
   });
-  
+
   const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
       <MuiDialogTitle disableTypography className={classes.root} {...other}>
         <Typography variant="h6">{children}</Typography>
         {onClose ? (
-          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={onClose}
+          >
             <CloseIcon />
           </IconButton>
         ) : null}
       </MuiDialogTitle>
     );
   });
-  
+
   const DialogContent = withStyles((theme) => ({
     root: {
       padding: theme.spacing(2),
@@ -88,12 +92,12 @@ function SwitchesGroup() {
   };
 
   const [message, setMessage] = React.useState({
-    theMessage: ""
+    theMessage: "",
   });
 
   async function getTheMessage() {
     var message = await generateText(await getResults(arrayStates));
-    setMessage(message)
+    setMessage(message);
     handleClickOpen();
   }
 
@@ -174,7 +178,11 @@ function SwitchesGroup() {
       >
         Check results!
       </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Results
         </DialogTitle>
@@ -190,23 +198,23 @@ function SwitchesGroup() {
 
 async function generateText(theScore) {
   var messageReturn = "";
-  
+
   let judgeScore = await theScore;
 
   if (judgeScore <= 25) {
-    messageReturn = "ULTRA SUS"
+    messageReturn = "ULTRA SUS";
   }
-  
+
   if (25 < judgeScore && judgeScore < 45) {
-    messageReturn = "Very sus"
+    messageReturn = "Very sus";
   }
 
   if (45 <= judgeScore && judgeScore < 75) {
-    messageReturn = "Moderately sus"
+    messageReturn = "Moderately sus";
   }
 
   if (75 <= judgeScore && judgeScore <= 90) {
-    messageReturn = "A bit sus"
+    messageReturn = "A bit sus";
   }
 
   if (judgeScore > 90) {
@@ -243,18 +251,18 @@ async function getResults(formData) {
     score = score - 10;
   }
 
-  if (tweetScore >= 0.80) {
+  if (tweetScore >= 0.8) {
     score = score - 80;
   }
 
-  if (0.5 < tweetScore && tweetScore < 0.80) {
+  if (0.5 < tweetScore && tweetScore < 0.8) {
     score = score - 50;
   }
 
   if (riceScore < 20) {
     score = score - 40;
   }
-  
+
   if (20 <= riceScore && riceScore < 40) {
     score = score - 30;
   }
@@ -293,14 +301,12 @@ async function getToxicity(tweetPassed) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "text": [
-        `${tweetPassed}`
-      ]
+      text: [`${tweetPassed}`],
     }),
   });
 
   const data = await toxicData.json();
-  
+
   let newScore = data.results[0].predictions.toxic;
   return newScore;
 }
