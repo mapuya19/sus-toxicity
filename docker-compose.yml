@@ -4,7 +4,7 @@ services:
         container_name: front-end
         build:
             context: ./front-end
-            dockerfile: Dockerfile.dev
+            dockerfile: Dockerfile.react
         image: mapuya19/sus_toxcity/frontend
         ports:
             - "3000:3000"
@@ -14,7 +14,7 @@ services:
         container_name: node_server
         build:
             context: ./node-server
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.node
         image: mapuya19/sus_toxcity/backend
         ports:
             - "8000:8000"
@@ -24,7 +24,7 @@ services:
         container_name: max-classifier
         build:
             context: ./MAX-Toxic-Comment-Classifier
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.python
         image: mapuya19/sus_toxicity/max-classifier
         ports:
             - "5000:5000"
